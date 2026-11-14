@@ -80,11 +80,56 @@
           </li>
         </ul>
       </section>
+
+      <section class="card" aria-label="Monitoring Serveur">
+        <h2>Monitoring Serveur (Client-Side)</h2>
+        <div class="widget-metrics">
+          <div class="metric-box">
+            <span class="metric-title">Service Apache 2</span>
+            <span class="metric-val" id="apache-status">active (running)</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-title">Ubuntu 22.04 LTS</span>
+            <span class="metric-val" id="os-uptime">up 14d 06h</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-title">Charge CPU (simulée)</span>
+            <span class="metric-val" id="cpu-load">0.18</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-title">Latence HTTP</span>
+            <span class="metric-val" id="http-latency">12 ms</span>
+          </div>
+        </div>
+        <button type="button" class="btn-refresh" id="refresh-widget">Actualiser la sonde</button>
+        <p class="widget-timestamp" id="widget-time">Dernière vérification : --:--:--</p>
+      </section>
     </div>
   </main>
 
   <footer class="footer">
     <p>TP 3 DevOps — Git, Branches, SSH &amp; GitHub Actions — Support pédagogique statique</p>
   </footer>
+
+  <script>
+    (function () {
+      const cpuEl = document.getElementById("cpu-load");
+      const latencyEl = document.getElementById("http-latency");
+      const timeEl = document.getElementById("widget-time");
+      const btn = document.getElementById("refresh-widget");
+
+      function updateMetrics() {
+        const cpu = (0.10 + Math.random() * 0.25).toFixed(2);
+        const latency = Math.floor(9 + Math.random() * 14);
+        const now = new Date().toLocaleTimeString("fr-FR");
+        cpuEl.textContent = cpu;
+        latencyEl.textContent = latency + " ms";
+        timeEl.textContent = "Dernière vérification : " + now;
+      }
+
+      btn.addEventListener("click", updateMetrics);
+      updateMetrics();
+    })();
+  </script>
 </body>
 </html>
